@@ -1,13 +1,122 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --current-cell-bg: 241, 169, 82;
+  --current-value-bg: #c590ea87;
+}
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body,
+#root {
+  height: 100%;
+  /* margin: 0; */
+  overflow: hidden;
 }
+
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.game {
+  container-type: inline-size;
+}
+
+.board {
+
+  *:focus, *:focus-visible {
+    outline: none;
+  }
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 90cqmin;
+  padding: 5px;
+
+  .cell {
+    border: 1px solid black;
+    background-color: white;
+    /* width: 4em; */
+    aspect-ratio: 1;
+    /* border: none; */
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    &[data-fixed="true"] {
+      color: blue;
+    }
+
+    & {
+      &[data-row="0"] {
+        border-top-width: 5px;
+      }
+
+      &[data-row="8"] {
+        border-bottom-width: 5px;
+      }
+
+      &[data-col="0"] {
+        border-left-width: 5px;
+      }
+
+      &[data-col="8"] {
+        border-right-width: 5px;
+      }
+
+      &[data-col="2"],
+      &[data-col="5"] {
+        border-right-width: 3px;
+      }
+
+      &[data-row="2"],
+      &[data-row="5"] {
+        border-bottom-width: 3px;
+      }
+    }
+
+    &[data-value] {
+      font-size: 8cqmin;
+      font-weight: 700;
+
+      &[data-value="1"]::after {
+        content: "1";
+      }
+
+      &[data-value="2"]::after {
+        content: "2";
+      }
+
+      &[data-value="3"]::after {
+        content: "3";
+      }
+
+      &[data-value="4"]::after {
+        content: "4";
+      }
+
+      &[data-value="5"]::after {
+        content: "5";
+      }
+
+      &[data-value="6"]::after {
+        content: "6";
+      }
+
+      &[data-value="7"]::after {
+        content: "7";
+      }
+
+      &[data-value="8"]::after {
+        content: "8";
+      }
+
+      &[data-value="9"]::after {
+        content: "9";
+      }
+    }
+  }
+}
+
