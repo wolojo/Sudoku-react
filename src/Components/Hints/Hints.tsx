@@ -1,6 +1,6 @@
 import './Hints.css'
 
-import { Hints as HintsType } from './components.types';
+import { Hints as HintsType } from '../components.types';
 
 type HintsProps = {
     hints: HintsType;

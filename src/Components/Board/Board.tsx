@@ -1,5 +1,5 @@
-import { Cell } from './Cell';
-import { BoardType, CellClickHandler, SelectionType } from './components.types';
+import { Cell } from '..';
+import { BoardType, CellClickHandler, SelectionType } from '../components.types';
 
 type BoardProps = {
     board: BoardType;
@@ -11,10 +11,10 @@ const Board = ({ board, currentCell, onCellClick }: BoardProps) => {
     return (
         <div
             className='board'
-            data-current-col={currentCell.col}
-            data-current-row={currentCell.row}
-            data-current-box={currentCell.box}
-            data-current-value={currentCell.value}
+            data-current-col={currentCell[0].col}
+            data-current-row={currentCell[0].row}
+            data-current-box={currentCell[0].box}
+            data-current-value={currentCell[0].value}
         >
             {board.map((cell, index) => (
                 <Cell

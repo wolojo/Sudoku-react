@@ -31,9 +31,12 @@ const processNumberKeys: ProcessNumberKeyFunction = (evt, handleCellChange) => {
 }
 
 const handleNumberKey = (evt: KeyboardEvent<HTMLElement>, currentCell: SelectionType, handleCellChange: CellChangeHandler) => {
-    if (currentCell.isFixed) return;
-    
-    const index = currentCell.row * 9 + currentCell.col;
+    // `currentCell` may be a SelectionType (an array holding the current cell)
+    // or a single CellType depending on how callers manage selection. Normalize to a single cell.
+    const active = Array.isArray(currentCell) ? currentCell[0] : (currentCell as any);
+    if (!active || active.isFixed) return;
+
+    const index = active.row * 9 + active.col;
     const cellChangeFunc = (value: number, isHint?: boolean) => handleCellChange(index, value, isHint);
 
     return processNumberKeys(evt, cellChangeFunc);
@@ -41,7 +44,9 @@ const handleNumberKey = (evt: KeyboardEvent<HTMLElement>, currentCell: Selection
 
 
 export function processKeyPress(currentCell: SelectionType, evt: KeyboardEvent<HTMLElement>, setCurrentCell: (setIndex: number) => void, handleCellChange: CellChangeHandler) {
-    let { col: currentColumn, row: currentRow } = currentCell;
+    // Normalize to the active cell object whether `currentCell` is an array or a single cell
+    const active = Array.isArray(currentCell) ? currentCell[0] : (currentCell as any);
+    let { col: currentColumn, row: currentRow } = active;
 
     switch (evt.key) {
         case "ArrowUp":

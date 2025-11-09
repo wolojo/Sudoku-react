@@ -1,8 +1,8 @@
-import Board from './Board';
+import { Board } from '../';
 import { KeyboardEvent, KeyboardEventHandler, useState } from 'react';
-import { BoardType, CellChangeHandler, CellType, SelectionType, SetSelectionFunctionType, Hints } from './components.types';
-import { toggleHint, clearHint } from '../Utils/hints';
-import { processKeyPress } from '../Utils/keyProcessing';
+import { BoardType, CellChangeHandler, CellType, Hints, SelectionType, SetSelectionFunctionType } from '../components.types';
+import { toggleHint, clearHint } from '../../Utils/hints';
+import { processKeyPress } from '../../Utils/keyProcessing';
 
 const initialBoard: BoardType = [
     5, 3, 0, 0, 7, 0, 0, 0, 0,
@@ -21,13 +21,13 @@ const initialBoard: BoardType = [
         col: index % 9,
         row: Math.floor(index / 9),
         box: Math.floor(index / 27) * 3 + Math.floor((index % 9) / 3),
-    hints: [false, false, false, false, false, false, false, false, false] as Hints,
+        hints: [false, false, false, false, false, false, false, false, false] as Hints,
     }
 ));
 
 function Game() {
     const [board, setBoard] = useState(initialBoard);
-    const [currentCell, setCurrentCell]: [SelectionType, SetSelectionFunctionType] = useState(initialBoard[40]);
+    const [currentCell, setCurrentCell]: [SelectionType, SetSelectionFunctionType] = useState([initialBoard[40]]);
 
     const handleCellChange: CellChangeHandler = (index, value, isHint) => {
         // Update board immutably to avoid accidental shared-state mutations.
@@ -71,12 +71,12 @@ function Game() {
     };
 
     const handleCellClick = (cell: CellType) => {
-        setCurrentCell(cell);
+        setCurrentCell([cell]);
     };
 
     const handleKeyDown: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         return processKeyPress(currentCell, evt,
-            (index: number) => setCurrentCell(board[index]),
+            (index: number) => setCurrentCell([board[index]]),
             handleCellChange);
     }
 
@@ -93,4 +93,3 @@ function Game() {
 }
 
 export default Game;
-

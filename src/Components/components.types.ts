@@ -10,10 +10,10 @@ export type CellType = {
     hints: Hints;
 }
 
-export type SelectionType = CellType;
-export type BoardType = Array<CellType>;
-
+export type SelectionType = Array<CellType>;
 export type SetSelectionFunctionType = Dispatch<SetStateAction<SelectionType>>;
+
+export type BoardType = Array<CellType>;
 
 export type CellChangeHandler = (index: number, value: number, isHint?: boolean) => void;
 export type CellClickHandler = (cell: CellType) => void;

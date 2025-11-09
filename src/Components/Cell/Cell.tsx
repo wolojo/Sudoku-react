@@ -1,6 +1,6 @@
-import Hints from './Hints';
+import { Hints } from '../';
 import { MouseEventHandler } from 'react';
-import { CellType } from './components.types';
+import { CellType } from '../components.types';
 
 import './Cell.css';
 
@@ -8,7 +8,7 @@ type CellProps = {
     cell: CellType;
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
-export const Cell = ({ cell, onClick }: CellProps) => {
+const Cell = ({ cell, onClick }: CellProps) => {
 
     return (
         <button
@@ -24,3 +24,5 @@ export const Cell = ({ cell, onClick }: CellProps) => {
         </button>
     );
 };
+
+export default Cell;

@@ -20,7 +20,7 @@ describe('processKeyPress', () => {
         const setCurrentCell = (i: number) => { setIndexCalled = i; };
 
         const evtUp = new KeyboardEvent('keydown', { key: 'ArrowUp' });
-        processKeyPress(cell, evtUp as any, setCurrentCell, jest.fn());
+    processKeyPress([cell], evtUp as any, setCurrentCell, jest.fn());
         expect(setIndexCalled).toBe(3 * 9 + 4);
     });
 
@@ -30,7 +30,7 @@ describe('processKeyPress', () => {
         const setCurrentCell = (i: number) => { setIndexCalled = i; };
 
         const evtLeft = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-        processKeyPress(cell, evtLeft as any, setCurrentCell, jest.fn());
+    processKeyPress([cell], evtLeft as any, setCurrentCell, jest.fn());
         expect(setIndexCalled).toBe(4 * 9 + 3);
     });
 
@@ -40,7 +40,7 @@ describe('processKeyPress', () => {
         const setCurrentCell = (i: number) => { setIndexCalled = i; };
 
         const evtUpWrap = new KeyboardEvent('keydown', { key: 'ArrowUp' });
-        processKeyPress(cell, evtUpWrap as any, setCurrentCell, jest.fn());
+    processKeyPress([cell], evtUpWrap as any, setCurrentCell, jest.fn());
         expect(setIndexCalled).toBe(8 * 9 + 0);
     });
 
@@ -50,7 +50,7 @@ describe('processKeyPress', () => {
         const setCurrentCell = jest.fn();
 
         const evt1 = new KeyboardEvent('keydown', { key: '1' });
-        processKeyPress(cell, evt1 as any, setCurrentCell as any, mockHandle as any);
+    processKeyPress([cell], evt1 as any, setCurrentCell as any, mockHandle as any);
         expect(mockHandle).toHaveBeenCalled();
         const firstCallArgs = mockHandle.mock.calls[0];
         expect(firstCallArgs[0]).toBe(0);
@@ -62,7 +62,7 @@ describe('processKeyPress', () => {
         const setCurrentCell = jest.fn();
 
         const evtDel = new KeyboardEvent('keydown', { key: 'Backspace' });
-        processKeyPress(cell, evtDel as any, setCurrentCell as any, mockHandle as any);
+    processKeyPress([cell], evtDel as any, setCurrentCell as any, mockHandle as any);
         expect(mockHandle).toHaveBeenCalled();
         const delArgs = mockHandle.mock.calls[0];
         expect(delArgs[0]).toBe(0);
